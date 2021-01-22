@@ -34,8 +34,8 @@ SERVICE_FILE=${INSTALL_DIR}/nsloop.service
 START_FILE=${INSTALL_DIR}/start.sh
 EXE_FILE=${INSTALL_DIR}/nattunnel
 
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE} > /etc/systemd/system/nsloop.service &&
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE} > ${START_FILE}
+sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE}.template > /etc/systemd/system/nsloop.service &&
+sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE}.template > ${START_FILE}
 chmod ug+x ${EXE_FILE}
 chmod ug+x ${START_FILE}
 
