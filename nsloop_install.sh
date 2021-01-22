@@ -1,5 +1,5 @@
 #!/bin/sh
-if [[ ! ${INSTALL_DIR}]]
+if [[ ! ${INSTALL_DIR} ]]
 then
     INSTALL_DIR=/root/.nsloop
 fi
@@ -10,33 +10,32 @@ then
     echo 'usage: ' $0 token
     echo 'for example: ' $0 xxxx-xxxx-xxxx-xxxx
     exit 1
-elif [ $# -gt 1]
+elif [ $# -gt 1 ]
+then
     echo 'ERROR: too much args!'
     echo 'usage: ' $0 token
     echo 'for example: ' $0 xxxx-xxxx-xxxx-xxxx 
     exit 1
 fi
 
-if [ -d /root/.nsloop ]
+if [ -d ${INSTALL_DIR} ]
 then
-    rm -rf /root/.nsloop
+    rm -rf ${INSTALL_DIR}
 fi
 
-if [ -f /root/.nsloop ]
+if [ -f ${INSTALL_DIR} ]
 then
-    rm -f /root/.nsloop
+    rm -f ${INSTALL_DIR}
 fi
 
 git clone https://github.com/tanganke/nsloop_install ${INSTALL_DIR}
 
 SERVICE_FILE=${INSTALL_DIR}/nsloop.service
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE} > /etc/systemed/system/nsloop.sevice
-
 START_FILE=${INSTALL_DIR}/start.sh
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE} > ${START_FILE}
-
 EXE_FILE=${INSTALL_DIR}/nattunnel
 
+sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE} > /etc/systemd/system/nsloop.service &&
+sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE} > ${START_FILE}
 chmod og+x ${EXE_FILE}
 chmod og+x ${START_FILE}
 
