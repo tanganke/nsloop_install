@@ -1,0 +1,13 @@
+[Unit]
+Description=nsloop
+After=network.target
+ConditionPathExists=INSTALL_DIR/start.sh
+
+[Service]
+Type=forking
+ExecStart=INSTALL_DIR/start.sh
+TimeoutSec=0
+
+
+[Install]
+WantedBy=multi-user.target
