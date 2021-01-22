@@ -36,8 +36,8 @@ EXE_FILE=${INSTALL_DIR}/nattunnel
 
 sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE} > /etc/systemd/system/nsloop.service &&
 sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE} > ${START_FILE}
-chmod og+x ${EXE_FILE}
-chmod og+x ${START_FILE}
+chmod ug+x ${EXE_FILE}
+chmod ug+x ${START_FILE}
 
 echo $1 > ${INSTALL_DIR}/token
 systemctl enable --now nsloop
