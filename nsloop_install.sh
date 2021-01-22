@@ -34,10 +34,16 @@ SERVICE_FILE=${INSTALL_DIR}/nsloop.service
 START_FILE=${INSTALL_DIR}/start.sh
 EXE_FILE=${INSTALL_DIR}/nattunnel
 
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${SERVICE_FILE}.template > /etc/systemd/system/nsloop.service &&
-sed s+INSTALL_DIR+${INSTALL_DIR}+ ${START_FILE}.template > ${START_FILE}
+echo 'generate nsloop.service'
+sed s+INSTALL_DIR+${INSTALL_DIR}+g ${SERVICE_FILE}.template > /etc/systemd/system/nsloop.service &&
+
+echo 'generate start.sh'
+sed s+INSTALL_DIR+${INSTALL_DIR}+g ${START_FILE}.template > ${START_FILE}
+
 chmod ug+x ${EXE_FILE}
 chmod ug+x ${START_FILE}
 
+echo 'config token'
 echo $1 > ${INSTALL_DIR}/token
+
 systemctl enable --now nsloop
